@@ -77,9 +77,9 @@ img, svg { display: block; max-width: 100%; }
 .preloader__bar span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--lime), var(--magenta)); }
 
 /* ---------- nav ---------- */
-.nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 22px var(--pad); mix-blend-mode: difference; }
+.nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 22px var(--pad); }
 .nav__brand { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 22px; letter-spacing: .01em; color: #fff; text-transform: uppercase; }
-.nav__logo { width: 26px; height: 26px; border-radius: 7px; flex: 0 0 auto; }
+.nav__logo { width: 26px; height: 26px; border-radius: 7px; flex: 0 0 auto; background: #0a0a0c; box-shadow: 0 0 0 1px rgba(214,255,63,.4); }
 .nav__word { line-height: 1; }
 .nav__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); margin-left: 2px; animation: pulse 2.4s var(--ease) infinite; }
 .nav__links { display: flex; gap: clamp(14px, 2.5vw, 38px); }
