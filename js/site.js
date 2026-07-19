@@ -235,6 +235,107 @@
     gsap.to(".blob--magenta", { x: -50, y: -30, duration: 11, repeat: -1, yoyo: true, ease: "sine.inOut" });
   }
 
+  /* ---------- HERO generative canvas: drifting node-network (signature) ---------- */
+  function initHeroCanvas() {
+    const cv = $("#heroCanvas");
+    if (!cv || reduce) return;
+    const ctx = cv.getContext("2d");
+    let w, h, dpr, pts = [], raf;
+    const COL = ["#d6ff3f", "#ff2e93", "#3a5bff"];
+    const mouse = { x: -9999, y: -9999 };
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = cv.clientWidth; h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(28, Math.min(70, Math.floor(w * h / 22000)));
+      pts = Array.from({ length: count }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
+        r: Math.random() * 1.8 + .8, c: COL[(Math.random() * COL.length) | 0]
+      }));
+    }
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        // gentle pull toward cursor
+        const dx = mouse.x - p.x, dy = mouse.y - p.y, d2 = dx * dx + dy * dy;
+        if (d2 < 26000) { p.x += dx * .0012; p.y += dy * .0012; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fillStyle = p.c; ctx.fill();
+      }
+      for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+        const a = pts[i], b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+        if (d < 130) {
+          ctx.globalAlpha = (1 - d / 130) * .5;
+          ctx.strokeStyle = a.c; ctx.lineWidth = .6;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    }
+    addEventListener("resize", resize);
+    addEventListener("mousemove", e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+    addEventListener("mouseleave", () => { mouse.x = mouse.y = -9999; });
+    resize(); frame();
+  }
+
+  /* ---------- rotating tagline words ---------- */
+  function initRotator() {
+    const el = $("#rotator");
+    if (!el || reduce || !window.gsap) return;
+    const words = ["bold identities", "editorial stories", "motion that moves", "brands with nerve", "visual worlds"];
+    let current = el.querySelector("span");
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      const prev = current;
+      const next = document.createElement("span");
+      next.textContent = words[i];
+      el.appendChild(next);
+      gsap.fromTo(prev, { yPercent: 0 }, { yPercent: -110, duration: .5, ease: "power3.in" });
+      gsap.fromTo(next, { yPercent: 110 }, { yPercent: 0, duration: .5, ease: "power3.out", onComplete: () => { prev.remove(); } });
+      current = next;
+    }, 2600);
+  }
+
+  /* ---------- magnetic buttons ---------- */
+  function initMagnetic() {
+    if (reduce || !hoverOk) return;
+    $$(".cta-link, .contact-cta__mail, .card, .filter, .toggle-view button, .contact-page__form button").forEach(el => {
+      el.classList.add("magnetic");
+      el.addEventListener("mousemove", e => {
+        const r = el.getBoundingClientRect();
+        const mx = e.clientX - (r.left + r.width / 2), my = e.clientY - (r.top + r.height / 2);
+        const pull = el.classList.contains("card") ? .12 : .28;
+        el.style.transform = `translate(${mx * pull}px, ${my * pull}px)`;
+      });
+      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
+    });
+  }
+
+  /* ---------- nav word scramble on hover ---------- */
+  function initScramble() {
+    if (reduce) return;
+    const el = $(".nav__word");
+    if (!el) return;
+    const real = el.textContent;
+    const chars = "RDANI#%&/0123456789";
+    let t;
+    el.addEventListener("mouseenter", () => {
+      let frame = 0;
+      clearInterval(t);
+      t = setInterval(() => {
+        frame++;
+        el.textContent = real.split("").map((c, k) => k < frame / 2 ? c : chars[(Math.random() * chars.length) | 0]).join("");
+        if (frame / 2 >= real.length) { clearInterval(t); el.textContent = real; }
+      }, 28);
+    });
+  }
+
   /* ---------- boot ---------- */
   function boot() {
     initLenis();
@@ -245,6 +346,10 @@
     initMarquee();
     initReveals();
     initBlobs();
+    initHeroCanvas();
+    initRotator();
+    initMagnetic();
+    initScramble();
     animateHero();
   }
 
