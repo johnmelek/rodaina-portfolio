@@ -1,59 +1,52 @@
-# Rodaina — Portfolio
+# Rodaina — Portfolio (multi-page, free)
 
-A bold, experimental graphic-designer portfolio. Built free, deployed free on GitHub Pages.
+A bold, experimental graphic-designer portfolio. Static site, zero runtime cost,
+deployed free on GitHub Pages. GSAP / ScrollTrigger / Lenis are vendored (no CDN dependency).
 
-- **Zero runtime cost** — static site, no servers, no subscriptions.
-- **Zero external dependencies** — GSAP, ScrollTrigger and Lenis are vendored in `vendor/`. Only Google Fonts loads over the network (graceful fallback to system fonts if offline).
-- **Grows every day** — add a project by editing one file (`js/projects.js`). No build step.
+## Pages
+- `index.html` — Home (hero, featured work, services, about teaser, contact CTA)
+- `work.html` — **The Library**: full archive, category filters, grid/list toggle, sort
+- `about.html` — About + stats
+- `contact.html` — Contact + form (front-end only)
+- `project.html?id=ID` — per-project case-study page (auto-rendered from data)
 
 ## Add a project (no coding needed)
+Open `js/projects.js`. Copy any block between `{ ... }`, paste it at the END of the list
+(before the closing `]`), edit the fields:
 
-Open `js/projects.js`. Copy any block between `{ ... }`, paste it at the end of the list
-(before the closing `]`), and edit the text:
+| Field | Meaning |
+|-------|---------|
+| `id` | unique short name, no spaces — e.g. `"aurora"` |
+| `title` | project name |
+| `category` | `Branding` `Editorial` `Illustration` `Motion` `Packaging` `Art Direction` |
+| `year` | `"2026"` |
+| `client` | client name or `"Personal"` |
+| `role` | what Rodaina did |
+| `featured` | `true` to show on the home page (keep ~4–6) |
+| `summary` | one-line hook |
+| `desc` | longer paragraph for the detail page |
+| `services` | `[ "Brand Strategy", "Logo Design" ]` |
+| `size` | `"lg"` (big card) / `"sm"` (small) / omit |
+| `art` | cover style: `waves` `orbs` `grid` `type` `blob` `shards` |
+| `seed` | any number — changes the generated pattern |
+| `palette` | `lime` `magenta` `blue` `sunset` `mono` `candy` |
+| `url` | live link or `"#"` |
+| `gallery` | extra visuals: `[ { art, seed, palette }, ... ]` |
 
-| Field     | What to put                                                                 |
-|-----------|-----------------------------------------------------------------------------|
-| `id`      | unique short name, no spaces — e.g. `"aurora"`                               |
-| `title`   | project name                                                                 |
-| `category`| one of: `Branding` `Editorial` `Illustration` `Motion` `Packaging` `Art Direction` |
-| `year`    | e.g. `"2026"`                                                               |
-| `client`  | client name or `"Personal"`                                                  |
-| `role`    | what Rodaina did                                                            |
-| `desc`    | one or two sentences                                                        |
-| `size`    | `"lg"` (big card), `"sm"` (small), or omit                                  |
-| `art`     | cover style: `waves` `orbs` `grid` `type` `blob` `shards`                  |
-| `seed`    | any number — changes the generated pattern                                  |
-| `palette` | `lime` `magenta` `blue` `sunset` `mono` `candy`                            |
-| `url`     | link to live project, or `"#"`                                              |
-| `gallery` | extra images: `[ { art, seed, palette }, ... ]` (optional)                  |
-
-Save. The site updates itself — layout, filter buttons, animations all adapt.
+Save + `git push` → every page (home, Library, detail) updates automatically.
 
 ## Replace generated covers with real images
-
-The covers are generated SVG art (so the site never looks empty). To use real work:
-
-1. Put image files in `assets/` (e.g. `assets/neonharvest.jpg`).
-2. In `projects.js`, replace `art/seed/palette` with `image: "assets/neonharvest.jpg"`.
-3. The card and modal will show the image instead.
+Put files in `assets/`, then in `projects.js` replace `art/seed/palette` with
+`image: "assets/neonharvest.jpg"`. Cards and detail pages will show the image.
 
 ## Local preview
-
 ```bash
 cd rodaina-portfolio
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Deploy (already done — GitHub Pages)
-
-Pushed to `johnmelek-bmc/rodaina-portfolio`, served at:
+## Deploy (GitHub Pages, free, auto)
+Push to `main` → GitHub Actions builds & deploys. Live at:
 `https://johnmelek-bmc.github.io/rodaina-portfolio/`
-
-To update: edit files, `git add -A`, `git commit -m "add projects"`, `git push`.
-GitHub Pages rebuilds automatically.
-
-## Custom domain (optional, still free)
-
-In the repo **Settings → Pages**, add a custom domain (e.g. `rodaina.studio`) and
-point your DNS at GitHub. No cost beyond the domain itself.
+Optional free custom domain in repo **Settings → Pages**.

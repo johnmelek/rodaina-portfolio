@@ -5,45 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rodaina — Graphic Designer & Art Director</title>
   <meta name="description" content="Rodaina — graphic designer and art director. Branding, editorial, illustration and motion work." />
-  <meta property="og:title" content="Rodaina — Graphic Designer & Art Director" />
-  <meta property="og:description" content="Selected work in branding, editorial, illustration and motion." />
-  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <!-- Custom cursor -->
-  <div class="cursor" id="cursor" aria-hidden="true">
-    <span class="cursor__label" id="cursorLabel"></span>
-  </div>
+<body data-page="home">
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+  <div class="transition" id="transition"><div class="transition__label" id="transitionLabel"></div></div>
 
-  <!-- Preloader -->
   <div class="preloader" id="preloader">
     <div class="preloader__inner">
       <div class="preloader__count"><span id="preCount">0</span><span class="preloader__pct">%</span></div>
-      <div class="preloader__name">
-        <span>R</span><span>O</span><span>D</span><span>A</span><span>I</span><span>N</span><span>A</span>
-      </div>
+      <div class="preloader__name"><span>R</span><span>O</span><span>D</span><span>A</span><span>I</span><span>N</span><span>A</span></div>
       <div class="preloader__bar"><span id="preBar"></span></div>
     </div>
   </div>
 
-  <!-- Navigation -->
   <header class="nav" id="nav">
-    <a href="#top" class="nav__brand" data-cursor="top">Rodaina<span class="nav__dot"></span></a>
+    <a href="index.html" class="nav__brand" data-cursor="top" data-page="home">Rodaina<span class="nav__dot"></span></a>
     <nav class="nav__links">
-      <a href="#work" data-cursor="view">Work</a>
-      <a href="#about" data-cursor="read">About</a>
-      <a href="#contact" data-cursor="say hi">Contact</a>
+      <a href="work.html" data-page="work">Work</a>
+      <a href="about.html" data-page="about">About</a>
+      <a href="contact.html" data-page="contact">Contact</a>
     </nav>
-    <a href="#contact" class="nav__status" data-cursor="say hi">
-      <span class="nav__pulse"></span> Available for work
-    </a>
+    <a href="contact.html" class="nav__status" data-cursor="say hi"><span class="nav__pulse"></span> Available for work</a>
   </header>
 
-  <main id="top">
+  <main>
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero__bg" aria-hidden="true">
@@ -52,30 +41,23 @@
         <div class="blob blob--blue"></div>
         <div class="hero__grid"></div>
       </div>
-
       <div class="hero__kicker" data-reveal>
         <span class="tag">Graphic Designer</span>
         <span class="tag tag--outline">Art Director</span>
         <span class="tag">Visual Maker</span>
       </div>
-
       <h1 class="hero__name" id="heroName" aria-label="Rodaina">
         <span class="hero__line">
           <span class="ch" style="--i:0">R</span><span class="ch" style="--i:1">O</span><span class="ch" style="--i:2">D</span><span class="ch" style="--i:3">A</span><span class="ch" style="--i:4">I</span><span class="ch" style="--i:5">N</span><span class="ch" style="--i:6">A</span>
         </span>
       </h1>
-
       <div class="hero__foot">
         <p class="hero__tagline" id="tagline" data-reveal>Designing <span class="hl">bold</span> identities, <span class="hl hl--mag">editorial</span> stories &amp; things that move.</p>
-        <div class="hero__scroll" data-reveal>
-          <span>Scroll</span>
-          <span class="hero__scrollline"></span>
-        </div>
+        <div class="hero__scroll" data-reveal><span>Scroll</span><span class="hero__scrollline"></span></div>
       </div>
-
       <div class="hero__corner hero__corner--tl">EST. LYON</div>
       <div class="hero__corner hero__corner--tr">© <span id="year1">2026</span></div>
-      <div class="hero__corner hero__corner--bl">PORTFOLIO v1.0</div>
+      <div class="hero__corner hero__corner--bl">PORTFOLIO v2.0</div>
       <div class="hero__corner hero__corner--br" id="clock">--:--:--</div>
     </section>
 
@@ -91,61 +73,53 @@
       </div>
     </div>
 
-    <!-- WORK -->
-    <section class="work" id="work">
+    <!-- FEATURED WORK -->
+    <section class="work">
       <div class="section-head" data-reveal>
         <span class="section-head__index">01 — Selected Work</span>
         <div class="section-head__row">
           <h2 class="section-head__title">The <span class="hl hl--lime">Work</span></h2>
-          <p class="section-head__note" id="workCount"></p>
+          <p class="section-head__note">A rotating selection. The full archive lives in the Library.</p>
         </div>
       </div>
-
-      <div class="filters" id="filters" data-reveal>
-        <!-- populated by JS -->
-      </div>
-
-      <div class="grid" id="grid">
-        <!-- populated by JS -->
+      <div class="featured" id="featuredGrid"></div>
+      <div class="cta-row" data-reveal>
+        <a class="cta-link" href="work.html" data-cursor="open">Enter the Library <span>→</span></a>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="section-head" data-reveal>
-        <span class="section-head__index">02 — About</span>
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="section-head" data-reveal><span class="section-head__index">02 — What I do</span></div>
+      <div class="services__grid" data-reveal>
+        <div class="service"><div class="service__n">01</div><div class="service__t">Branding</div><div class="service__d">Identities with a point of view — strategy, logos, systems that scale.</div></div>
+        <div class="service"><div class="service__n">02</div><div class="service__t">Editorial</div><div class="service__d">Magazines, books and layouts where the grid is a playground.</div></div>
+        <div class="service"><div class="service__n">03</div><div class="service__t">Illustration</div><div class="service__d">Hand-made and generative imagery, from spot to campaign.</div></div>
+        <div class="service"><div class="service__n">04</div><div class="service__t">Motion</div><div class="service__d">Titles, loops and UI motion systems with real energy.</div></div>
       </div>
-      <div class="about__grid">
-        <div class="about__lead" data-reveal>
-          <h2 class="about__statement">
-            I'm Rodaina — a graphic designer who turns <span class="hl">raw ideas</span> into
-            <span class="hl hl--mag">loud, living</span> visual worlds.
-          </h2>
-        </div>
-        <div class="about__body" data-reveal>
-          <p>I craft brand identities, editorial layouts and motion pieces that feel intentional — not templated. Every project starts with a question and ends with something people remember.</p>
-          <p>Currently taking on freelance and collaboration work. If it needs a point of view, I'm in.</p>
-          <ul class="about__skills">
-            <li>Brand Identity</li><li>Art Direction</li><li>Editorial</li>
-            <li>Illustration</li><li>Motion</li><li>Packaging</li>
-            <li>Type Design</li><li>Creative Coding</li>
-          </ul>
+    </section>
+
+    <!-- ABOUT TEASER -->
+    <section class="about-teaser">
+      <div class="section-head" data-reveal><span class="section-head__index">03 — About</span></div>
+      <div class="about-teaser__grid">
+        <div class="about-teaser__portrait" data-reveal id="portraitArt"></div>
+        <div data-reveal>
+          <h2 class="about-teaser__statement">I turn <span class="hl">raw ideas</span> into <span class="hl hl--mag">loud, living</span> visual worlds.</h2>
+          <div class="about-teaser__body">
+            <p>I'm Rodaina — a graphic designer who makes brands, editorial and motion that feel intentional, never templated.</p>
+            <a class="cta-link" href="about.html" data-cursor="read">More about me <span>→</span></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="contact__inner" data-reveal>
-        <span class="section-head__index">03 — Contact</span>
-        <h2 class="contact__title">Let's make<br><span class="hl hl--lime">something</span> loud.</h2>
-        <a href="mailto:hello@rodaina.studio" class="contact__mail" data-cursor="email">hello@rodaina.studio</a>
-        <div class="contact__socials">
-          <a href="#" data-cursor="visit">Instagram</a>
-          <a href="#" data-cursor="visit">Behance</a>
-          <a href="#" data-cursor="visit">LinkedIn</a>
-          <a href="#" data-cursor="visit">Dribbble</a>
-        </div>
+    <!-- CONTACT CTA -->
+    <section class="contact-cta">
+      <div class="contact-cta__inner" data-reveal>
+        <span class="section-head__index">04 — Contact</span>
+        <h2 class="contact-cta__title">Let's make<br><span class="hl hl--lime">something</span> loud.</h2>
+        <a href="contact.html" class="contact-cta__mail" data-cursor="email">hello@rodaina.studio</a>
       </div>
     </section>
   </main>
@@ -153,32 +127,15 @@
   <footer class="footer">
     <span>© <span id="year2">2026</span> Rodaina — Graphic Designer</span>
     <span class="footer__mid">Built with care, deployed free on GitHub Pages.</span>
-    <a href="#top" data-cursor="top">Back to top ↑</a>
+    <a href="index.html" data-cursor="top">Back to top ↑</a>
   </footer>
 
-  <!-- PROJECT MODAL -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal__backdrop" id="modalBackdrop"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal__close" id="modalClose" data-cursor="close" aria-label="Close">✕</button>
-      <div class="modal__media" id="modalMedia"></div>
-      <div class="modal__content">
-        <span class="modal__cat" id="modalCat"></span>
-        <h3 class="modal__title" id="modalTitle"></h3>
-        <div class="modal__meta" id="modalMeta"></div>
-        <p class="modal__desc" id="modalDesc"></p>
-        <div class="modal__gallery" id="modalGallery"></div>
-        <a class="modal__cta" id="modalCta" href="#" data-cursor="visit">View live project →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="vendor/lenis.min.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/art.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/site.js"></script>
+  <script>document.getElementById('portraitArt').innerHTML = window.makeArt('blob', 7, 'candy', 500, 600);</script>
 </body>
 </html>

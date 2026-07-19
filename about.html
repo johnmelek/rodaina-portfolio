@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Rodaina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="about">
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+  <div class="transition" id="transition"><div class="transition__label" id="transitionLabel"></div></div>
+
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__count"><span id="preCount">0</span><span class="preloader__pct">%</span></div>
+      <div class="preloader__name"><span>R</span><span>O</span><span>D</span><span>A</span><span>I</span><span>N</span><span>A</span></div>
+      <div class="preloader__bar"><span id="preBar"></span></div>
+    </div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" data-cursor="top" data-page="home">Rodaina<span class="nav__dot"></span></a>
+    <nav class="nav__links">
+      <a href="work.html" data-page="work">Work</a>
+      <a href="about.html" data-page="about">About</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__status" data-cursor="say hi"><span class="nav__pulse"></span> Available for work</a>
+  </header>
+
+  <main class="page">
+    <section class="page-hero">
+      <div class="page-hero__bg" aria-hidden="true"><div class="blob blob--lime"></div><div class="blob blob--magenta"></div></div>
+      <span class="page-hero__index">02 — About</span>
+      <h1 class="page-hero__title">The <span class="hl hl--mag">Maker</span></h1>
+      <div class="page-hero__corner page-hero__corner--tr">© <span id="year1">2026</span></div>
+      <div class="page-hero__corner page-hero__corner--br" id="clock">--:--:--</div>
+    </section>
+
+    <div class="about-stats" data-reveal>
+      <div class="stat"><div class="stat__n">6+</div><div class="stat__l">Years designing</div></div>
+      <div class="stat"><div class="stat__n">40+</div><div class="stat__l">Projects shipped</div></div>
+      <div class="stat"><div class="stat__n">8</div><div class="stat__l">Disciplines</div></div>
+      <div class="stat"><div class="stat__n">∞</div><div class="stat__l">Ideas per brief</div></div>
+    </div>
+
+    <div class="about-long">
+      <p data-reveal>I'm <span class="hl">Rodaina</span> — a graphic designer and art director based in Lyon. I build identities, editorial systems and motion that feel alive, not assembled from a template.</p>
+      <p data-reveal>My work lives at the intersection of <span class="hl hl--mag">bold typography</span> and <span class="hl hl--lime">generative form</span>. I like constraints, I like contrast, and I like work that makes people stop scrolling.</p>
+      <p data-reveal>Currently freelancing and collaborating with studios and founders who want a real point of view. If your project needs one, we should talk.</p>
+      <a class="cta-link" href="contact.html" data-cursor="say hi">Start a project <span>→</span></a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year2">2026</span> Rodaina — Graphic Designer</span>
+    <span class="footer__mid">Built with care, deployed free on GitHub Pages.</span>
+    <a href="index.html" data-cursor="top">Back to top ↑</a>
+  </footer>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
