@@ -146,31 +146,19 @@ img, svg { display: block; max-width: 100%; }
 .marquee__track span { font-family: var(--font-display); font-size: clamp(26px, 5vw, 58px); text-transform: uppercase; letter-spacing: -.01em; color: var(--ink); }
 .marquee__star { color: var(--lime); font-size: clamp(16px, 3vw, 32px); }
 
-/* ---------- horizontal pinned scroller (continuous scroll showpiece) ---------- */
-.hscroll { position: relative; background: var(--bg); }
-.hscroll__pin {
-  height: 100vh; display: flex; align-items: center; overflow: hidden;
-  position: relative;
-}
-.hscroll__head {
-  position: absolute; top: clamp(80px,14vh,140px); left: var(--pad); z-index: 3;
-  max-width: 60%;
-}
-.hscroll__head .section-head__index { display:block; margin-bottom:10px; color:var(--ink-soft); font-size:13px; letter-spacing:.06em; }
-.hscroll__head h2 { font-family: var(--font-display); font-size: clamp(40px,9vw,140px); line-height:.82; text-transform:uppercase; margin:0; }
-.hscroll__hint { margin-top:14px; color:var(--lime); font-size:13px; letter-spacing:.08em; }
-.hscroll__track {
-  display: flex; gap: clamp(20px,3vw,46px); padding: 0 clamp(20px,8vw,180px);
-  will-change: transform; align-items: center;
-}
-.hscroll__track .card {
-  flex: 0 0 auto; width: clamp(280px, 40vw, 440px);
-  margin: 0 !important; /* override any grid sizing */
-}
+/* ---------- seamless auto-scroll archive reel ---------- */
+.reel { position: relative; background: var(--bg); padding: clamp(40px,8vh,90px) 0; overflow: hidden; }
+.reel__head { padding: 0 var(--pad); margin-bottom: clamp(20px,4vh,40px); }
+.reel__head .section-head__index { display:block; color:var(--ink-soft); font-size:13px; letter-spacing:.06em; margin-bottom:10px; }
+.reel__head h2 { font-family: var(--font-display); font-size: clamp(40px,9vw,140px); line-height:.82; text-transform:uppercase; margin:0; }
+.reel__hint { margin-top:12px; color:var(--lime); font-size:13px; letter-spacing:.08em; }
+.reel__viewport { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.reel__track { display: flex; gap: clamp(16px,2vw,30px); width: max-content; will-change: transform; align-items: stretch; }
+.reel__track .card { flex: 0 0 auto; width: clamp(260px, 30vw, 360px); margin: 0 !important; }
+@media (max-width: 700px){ .reel__track .card { width: 76vw; } }
 @media (prefers-reduced-motion: reduce){
-  .hscroll__pin { height: auto; padding: 60px 0; flex-direction: column; }
-  .hscroll__head { position: static; max-width:none; margin: 0 var(--pad) 30px; }
-  .hscroll__track { flex-wrap: wrap; justify-content: center; }
+  .reel__viewport { overflow-x: auto; }
+  .reel__hint::after { content: " (scroll)"; }
 }
 
 /* ---------- reversed continuous marquee divider ---------- */
@@ -179,6 +167,11 @@ img, svg { display: block; max-width: 100%; }
 .marquee--rev { background: var(--lime); }
 .marquee--rev .marquee__track span { color: #0a0a0c; }
 .marquee--rev .marquee__star { color: var(--magenta); }
+
+/* ---------- client marquee strip (continuous, opposite dir) ---------- */
+.marquee--clients { background: var(--bg-2); }
+.marquee--clients .marquee__track { animation: marqueeRev 34s linear infinite; }
+.marquee--clients .marquee__track span { color: var(--ink-soft); font-family: var(--font-body); text-transform: none; letter-spacing: .02em; font-weight: 500; font-size: clamp(16px, 2.4vw, 26px); }
 
 /* ---------- section title scrub parallax ---------- */
 .parallax-x { will-change: transform; display:inline-block; }

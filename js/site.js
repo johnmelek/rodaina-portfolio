@@ -79,14 +79,22 @@
     track.innerHTML += track.innerHTML; // duplicate for seamless -50% loop
   }
 
-  /* ---------- horizontal pinned scroll gallery ---------- */
-  function initHScroll() {
-    const pin = $("#hscrollPin");
-    const track = $("#hscrollTrack");
-    if (!pin || !track) return;
+  /* ---------- client marquee (continuous, duplicate for seamless loop) ---------- */
+  function initMarqueeClients() {
+    const track = $("#marqueeClientsTrack");
+    if (!track || reduce) return;
+    track.innerHTML += track.innerHTML;
+  }
+
+  /* ---------- seamless auto-scroll archive reel ---------- */
+  function initReel() {
+    const track = $("#reelTrack");
+    if (!track) return;
     const list = (window.PROJECTS || []).slice();
-    // populate unconditionally so cards always render
-    track.innerHTML = list.map((p, i) => cardHTML(p, i)).join("");
+    if (!list.length) return;
+    // build once, then duplicate the set for a seamless loop
+    const one = list.map((p, i) => cardHTML(p, i)).join("");
+    track.innerHTML = one + one;
     const cards = $$(".card", track);
     cards.forEach(c => {
       c.addEventListener("click", () => navigateTo(`project.html?id=${c.dataset.id}`));
@@ -95,24 +103,22 @@
         c.addEventListener("mouseleave", () => { cursor.classList.remove("is-view"); cursorLabel.textContent = ""; });
       }
     });
-    if (reduce || !window.gsap || !window.ScrollTrigger) return;
-    try {
-      gsap.registerPlugin(ScrollTrigger);
-      const getScroll = () => Math.max(0, track.scrollWidth - pin.clientWidth + parseFloat(getComputedStyle(track).paddingLeft) * 2);
-      gsap.to(track, {
-        x: () => -getScroll(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hscroll",
-          start: "top top",
-          end: () => "+=" + getScroll(),
-          scrub: 0.6,
-          pin: "#hscrollPin",
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
-    } catch (e) { /* pinning optional; cards remain visible */ }
+    if (reduce || !window.gsap) return; // reduced motion: static row, user can scroll-x
+    gsap.registerPlugin(ScrollTrigger);
+    // exact width of ONE set (gap included) = loop distance
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    const firstCard = cards[0];
+    const setW = firstCard.offsetWidth * list.length + gap * list.length;
+    const tween = gsap.to(track, {
+      x: -setW,
+      duration: Math.max(18, list.length * 2.2),
+      ease: "none",
+      repeat: -1,
+      modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % setW) }
+    });
+    // pause on hover for easy reading/clicking
+    track.addEventListener("mouseenter", () => tween.pause());
+    track.addEventListener("mouseleave", () => tween.play());
   }
 
   /* ---------- section title scrub parallax ---------- */
@@ -401,7 +407,8 @@
     initLibrary();
     initMarquee();
     initMarqueeRev();
-    initHScroll();
+    initMarqueeClients();
+    initReel();
     initParallax();
     initReveals();
     initBlobs();

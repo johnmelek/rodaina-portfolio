@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
 <body data-page="home">
   <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
@@ -75,15 +75,15 @@
       </div>
     </div>
 
-    <!-- HORIZONTAL PINNED SCROLL GALLERY -->
-    <section class="hscroll" id="hscroll">
-      <div class="hscroll__pin" id="hscrollPin">
-        <div class="hscroll__head">
-          <span class="section-head__index">Selected Work</span>
-          <h2>The <span class="hl hl--lime">Archive</span></h2>
-          <p class="hscroll__hint">scroll → the work flows sideways</p>
-        </div>
-        <div class="hscroll__track" id="hscrollTrack"></div>
+    <!-- SEAMLESS AUTO-SCROLL ARCHIVE REEL -->
+    <section class="reel" id="reel" aria-label="Selected work, scrolling">
+      <div class="reel__head">
+        <span class="section-head__index">Selected Work</span>
+        <h2>The <span class="hl hl--lime">Archive</span></h2>
+        <p class="reel__hint">a continuous reel — hover to pause</p>
+      </div>
+      <div class="reel__viewport">
+        <div class="reel__track" id="reelTrack"></div>
       </div>
     </section>
 
@@ -95,6 +95,20 @@
         <span>BOLD BRANDS</span><span class="marquee__star">✺</span>
         <span>LOUD IDEAS</span><span class="marquee__star">✺</span>
         <span>HELLO@RODAINA.STUDIO</span><span class="marquee__star">✺</span>
+      </div>
+    </div>
+
+    <!-- CONTINUOUS CLIENT MARQUEE (fake names for fullness) -->
+    <div class="marquee marquee--clients" aria-hidden="true">
+      <div class="marquee__track" id="marqueeClientsTrack">
+        <span>Harvest Co.</span><span class="marquee__star">✺</span>
+        <span>Pulse Radio</span><span class="marquee__star">✺</span>
+        <span>Riot Quarterly</span><span class="marquee__star">✺</span>
+        <span>Loop Records</span><span class="marquee__star">✺</span>
+        <span>Vertex Studio</span><span class="marquee__star">✺</span>
+        <span>Lumen Press</span><span class="marquee__star">✺</span>
+        <span>Aurora Labs</span><span class="marquee__star">✺</span>
+        <span>Wildcard Games</span><span class="marquee__star">✺</span>
       </div>
     </div>
 
