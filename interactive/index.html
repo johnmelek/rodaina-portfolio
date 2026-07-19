@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rodaina — Interactive Studio (v2)</title>
+  <meta name="description" content="Rodaina — an interactive, cursor-driven portfolio experiment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body data-page="interactive">
+  <!-- custom cursor -->
+  <div class="cur" id="cur" aria-hidden="true">
+    <div class="cur__ring" id="curRing"></div>
+    <div class="cur__dot" id="curDot"></div>
+    <span class="cur__label" id="curLabel"></span>
+  </div>
+
+  <!-- ambient cursor glow -->
+  <div class="glow" id="glow" aria-hidden="true"></div>
+
+  <!-- nav -->
+  <nav class="nav" id="nav">
+    <a class="nav__brand" href="../index.html" data-cursor="back">
+      <span class="nav__logo"><img src="../assets/favicon.svg" alt="" /></span>
+      <span class="nav__word">RODAINA</span>
+    </a>
+    <div class="nav__links">
+      <a href="../index.html" data-cursor="view">Original v1 ↗</a>
+      <a href="mailto:hello@rodaina.studio" data-cursor="mail">Contact</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <header class="hero" id="hero">
+    <div class="hero__stage" id="heroStage" data-tilt>
+      <p class="hero__kicker" data-spotlight>Graphic Designer · Art Director · Visual Maker</p>
+      <h1 class="hero__name">
+        <span class="ln">RODAINA</span>
+      </h1>
+      <p class="hero__sub" data-spotlight>I turn raw ideas into loud, living visual worlds. Move your cursor — everything reacts.</p>
+      <a class="btn-magnetic" href="#folder" data-cursor="open" id="toFolder">
+        <span>Open the folder</span>
+      </a>
+    </div>
+    <div class="hero__scroll" data-spotlight>SCROLL · or just move</div>
+  </header>
+
+  <!-- the visual FOLDER -->
+  <section class="folder-section" id="folder">
+    <div class="folder-head">
+      <h2 data-spotlight>THE WORK FOLDER</h2>
+      <p data-spotlight>Hover the folder — the projects spill out. Click one to open it.</p>
+    </div>
+
+    <div class="folder" id="folderWrap" data-cursor="open">
+      <div class="folder__back"></div>
+      <div class="folder__pocket"></div>
+      <button class="folder__flap" id="folderFlap" aria-label="Open project folder">
+        <span class="folder__tab">PROJECTS</span>
+      </button>
+      <div class="folder__cards" id="folderCards"><!-- cards injected --></div>
+    </div>
+
+    <p class="folder-hint" data-spotlight>8 projects inside · hover to explore</p>
+  </section>
+
+  <!-- about-ish strip -->
+  <section class="strip">
+    <h2 data-spotlight class="strip__title">EVERYTHING REACTS.</h2>
+    <p data-spotlight>This is a separate, experimental build — the original portfolio above stays exactly as it was. Cursor-driven motion, a folder that opens, cards that fly out.</p>
+    <a class="btn-magnetic" href="../index.html" data-cursor="view"><span>See the original →</span></a>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 Rodaina</span>
+    <span>Interactive experiment · v2</span>
+  </footer>
+
+  <!-- project modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+    <div class="modal__panel" id="modalPanel" role="dialog" aria-modal="true">
+      <button class="modal__close" id="modalClose" data-cursor="close">Close ✕</button>
+      <div class="modal__media" id="modalMedia"></div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="projects.js"></script>
+  <script src="art.js"></script>
+  <script src="interactive.js?v=1"></script>
+</body>
+</html>
