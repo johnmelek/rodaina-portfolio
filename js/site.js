@@ -63,13 +63,69 @@
     els.forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" } }));
   }
 
-  /* ---------- marquee ---------- */
+  /* ---------- marquee (top, gsap loop) ---------- */
   function initMarquee() {
     const track = $("#marqueeTrack");
     if (!track || reduce || !window.gsap) return;
     track.innerHTML += track.innerHTML;
     const half = track.scrollWidth / 2;
     gsap.to(track, { x: -half, duration: 22, ease: "none", repeat: -1, modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % half) } });
+  }
+
+  /* ---------- reverse marquee (continuous, opposite direction) ---------- */
+  function initMarqueeRev() {
+    const track = $("#marqueeRevTrack");
+    if (!track || reduce) return;
+    track.innerHTML += track.innerHTML; // duplicate for seamless -50% loop
+  }
+
+  /* ---------- horizontal pinned scroll gallery ---------- */
+  function initHScroll() {
+    const pin = $("#hscrollPin");
+    const track = $("#hscrollTrack");
+    if (!pin || !track) return;
+    const list = (window.PROJECTS || []).slice();
+    // populate unconditionally so cards always render
+    track.innerHTML = list.map((p, i) => cardHTML(p, i)).join("");
+    const cards = $$(".card", track);
+    cards.forEach(c => {
+      c.addEventListener("click", () => navigateTo(`project.html?id=${c.dataset.id}`));
+      if (cursor && !reduce && hoverOk) {
+        c.addEventListener("mouseenter", () => { cursor.classList.add("is-view"); cursorLabel.textContent = "view"; });
+        c.addEventListener("mouseleave", () => { cursor.classList.remove("is-view"); cursorLabel.textContent = ""; });
+      }
+    });
+    if (reduce || !window.gsap || !window.ScrollTrigger) return;
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+      const getScroll = () => Math.max(0, track.scrollWidth - pin.clientWidth + parseFloat(getComputedStyle(track).paddingLeft) * 2);
+      gsap.to(track, {
+        x: () => -getScroll(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hscroll",
+          start: "top top",
+          end: () => "+=" + getScroll(),
+          scrub: 0.6,
+          pin: "#hscrollPin",
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    } catch (e) { /* pinning optional; cards remain visible */ }
+  }
+
+  /* ---------- section title scrub parallax ---------- */
+  function initParallax() {
+    if (reduce || !window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
+    $$(".section-head__title, .contact-cta__title, .about-teaser__statement").forEach(el => {
+      const x = el.querySelector(".hl") ? el : el;
+      gsap.fromTo(el, { x: -40 }, {
+        x: 40, ease: "none",
+        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.8 }
+      });
+    });
   }
 
   /* ---------- nav active state ---------- */
@@ -344,6 +400,9 @@
     initFeatured();
     initLibrary();
     initMarquee();
+    initMarqueeRev();
+    initHScroll();
+    initParallax();
     initReveals();
     initBlobs();
     initHeroCanvas();

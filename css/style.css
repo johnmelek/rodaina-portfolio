@@ -146,7 +146,42 @@ img, svg { display: block; max-width: 100%; }
 .marquee__track span { font-family: var(--font-display); font-size: clamp(26px, 5vw, 58px); text-transform: uppercase; letter-spacing: -.01em; color: var(--ink); }
 .marquee__star { color: var(--lime); font-size: clamp(16px, 3vw, 32px); }
 
-/* ---------- HOME: featured grid ---------- */
+/* ---------- horizontal pinned scroller (continuous scroll showpiece) ---------- */
+.hscroll { position: relative; background: var(--bg); }
+.hscroll__pin {
+  height: 100vh; display: flex; align-items: center; overflow: hidden;
+  position: relative;
+}
+.hscroll__head {
+  position: absolute; top: clamp(80px,14vh,140px); left: var(--pad); z-index: 3;
+  max-width: 60%;
+}
+.hscroll__head .section-head__index { display:block; margin-bottom:10px; color:var(--ink-soft); font-size:13px; letter-spacing:.06em; }
+.hscroll__head h2 { font-family: var(--font-display); font-size: clamp(40px,9vw,140px); line-height:.82; text-transform:uppercase; margin:0; }
+.hscroll__hint { margin-top:14px; color:var(--lime); font-size:13px; letter-spacing:.08em; }
+.hscroll__track {
+  display: flex; gap: clamp(20px,3vw,46px); padding: 0 clamp(20px,8vw,180px);
+  will-change: transform; align-items: center;
+}
+.hscroll__track .card {
+  flex: 0 0 auto; width: clamp(280px, 40vw, 440px);
+  margin: 0 !important; /* override any grid sizing */
+}
+@media (prefers-reduced-motion: reduce){
+  .hscroll__pin { height: auto; padding: 60px 0; flex-direction: column; }
+  .hscroll__head { position: static; max-width:none; margin: 0 var(--pad) 30px; }
+  .hscroll__track { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ---------- reversed continuous marquee divider ---------- */
+.marquee--rev .marquee__track { animation: marqueeRev 28s linear infinite; }
+@keyframes marqueeRev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.marquee--rev { background: var(--lime); }
+.marquee--rev .marquee__track span { color: #0a0a0c; }
+.marquee--rev .marquee__star { color: var(--magenta); }
+
+/* ---------- section title scrub parallax ---------- */
+.parallax-x { will-change: transform; display:inline-block; }
 .featured { max-width: var(--maxw); margin: 0 auto; padding: 30px var(--pad) clamp(40px, 8vh, 90px); display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(14px, 2vw, 30px); }
 .card { position: relative; grid-column: span 4; border-radius: 18px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); min-height: 300px; transform: translateY(40px); opacity: 0; will-change: transform, opacity; }
 @media (max-width: 1100px){ .card { grid-column: span 6; } }
